@@ -5,7 +5,7 @@ import { Comment } from './entity/comment.entity';
 import { CreateCommentDto } from './dto/comment.dto';
 import { User } from '../user/entity/user.entity';
 import { plainToClass, plainToInstance } from 'class-transformer';
-import { Post } from '../post/entity/Post.entity';
+import { Post } from '../post/entity/post.entity';
 
 @Injectable()
 export class CommentService {

@@ -10,7 +10,7 @@ import { UpdatePostDto } from './dto/update-post.dto';
 import { User } from '../user/entity/user.entity';
 import { plainToClass } from 'class-transformer';
 import { GetPostsResponse } from '../post/types/posts';
-import { Post } from './entity/Post.entity';
+import { Post } from './entity/post.entity';
 
 @Injectable()
 export class PostService {
