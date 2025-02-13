@@ -10,6 +10,7 @@ import {
   Query,
   Put,
   Delete,
+  BadRequestException,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { CommentService } from './comments.service';
@@ -71,8 +72,12 @@ export class CommentController {
       },
     },
   })
-  async getComments() {
-    return this.commentService.getComments();
+  @Get()
+  async getComments(@Query('postId') postId: number) {
+    if (!postId) {
+      throw new BadRequestException('Post ID is required');
+    }
+    return this.commentService.getComments(postId);
   }
 
   @Get(':id')

@@ -37,10 +37,16 @@ export class CommentService {
     return plainToClass(Comment, comment);
   }
 
-  async getComments(): Promise<Comment[]> {
-    const comments = await this.commentRepository.find();
+  async getComments(postId: number): Promise<Comment[]> {
+    const comments = await this.commentRepository.find({
+      where: { post: { id: postId } },
+      relations: ['author'],
+      order: { createdAt: 'ASC' },
+    });
+  
     return plainToInstance(Comment, comments);
   }
+  
 
   async getCommentById(id: number): Promise<Comment> {
     const comment = await this.commentRepository.findOne({
