@@ -20,10 +20,9 @@ export class PostService {
   ) {}
 
   async createPost(user: User, body: CreatePostDto): Promise<Post> {
-    const { title, content } = body;
+    const { content } = body;
 
     const post = this.postRepository.create({
-      title,
       content,
       author: user,
     });
@@ -81,7 +80,6 @@ export class PostService {
       );
     }
 
-    post.title = title;
     post.content = content;
 
     await this.postRepository.save(post);
