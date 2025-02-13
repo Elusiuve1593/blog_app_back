@@ -13,8 +13,9 @@ import {
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { CommentService } from './comments.service';
-import { CreateCommentDto } from './dto/comment.dto';
+import { CreateCommentDto } from './dto/create-comment.dto';
 import { JwtAuthGuard } from '../user/jwt-auth.guard';
+import { UpdateCommentDto } from './dto/update-comment.dto';
 
 @ApiTags('comments')
 @Controller('comments')
@@ -116,7 +117,7 @@ export class CommentController {
   async updateComment(
     @Request() req,
     @Param('id', ParseIntPipe) id: number,
-    @Body() body: CreateCommentDto,
+    @Body() body: UpdateCommentDto,
   ) {
     return this.commentService.updateComment(req.user, id, body);
   }

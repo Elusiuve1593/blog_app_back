@@ -2,10 +2,11 @@ import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Comment } from './entity/comment.entity';
-import { CreateCommentDto } from './dto/comment.dto';
+import { CreateCommentDto } from './dto/create-comment.dto';
 import { User } from '../user/entity/user.entity';
 import { plainToClass, plainToInstance } from 'class-transformer';
 import { Post } from '../post/entity/post.entity';
+import { UpdateCommentDto } from './dto/update-comment.dto';
 
 @Injectable()
 export class CommentService {
@@ -52,7 +53,7 @@ export class CommentService {
     return plainToClass(Comment, comment);
   }
 
-  async updateComment(user: User, id: number, { content }: CreateCommentDto) {
+  async updateComment(user: User, id: number, { content }: UpdateCommentDto) {
     const comment = await this.commentRepository.findOne({
       where: { id },
     });
