@@ -63,7 +63,7 @@ export class PostService {
   }
 
   async updatePost(user: User, id: number, body: UpdatePostDto): Promise<Post> {
-    const { title, content } = body;
+    const { content } = body;
 
     const post = await this.postRepository.findOne({
       where: { id },
