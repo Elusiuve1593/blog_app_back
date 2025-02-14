@@ -4,12 +4,11 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { plainToClass } from 'class-transformer';
 import { Repository } from 'typeorm';
+import { User } from '../user/entity/user.entity';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
-import { User } from '../user/entity/user.entity';
-import { plainToClass } from 'class-transformer';
-import { GetPostsResponse } from '../post/types/posts';
 import { Post } from './entity/post.entity';
 
 @Injectable()

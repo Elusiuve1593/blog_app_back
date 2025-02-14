@@ -43,10 +43,9 @@ export class CommentService {
       relations: ['author'],
       order: { createdAt: 'ASC' },
     });
-  
+
     return plainToInstance(Comment, comments);
   }
-  
 
   async getCommentById(id: number): Promise<Comment> {
     const comment = await this.commentRepository.findOne({
@@ -59,7 +58,11 @@ export class CommentService {
     return plainToClass(Comment, comment);
   }
 
-  async updateComment(user: User, id: number, { content }: UpdateCommentDto) {
+  async updateComment(
+    user: User,
+    id: number,
+    { content }: UpdateCommentDto,
+  ): Promise<Comment> {
     const comment = await this.commentRepository.findOne({
       where: { id },
     });
@@ -71,15 +74,13 @@ export class CommentService {
     if (comment.author.id !== user.id) {
       throw new HttpException('You are not allowed to edit this comment', 500);
     }
-
     comment.content = content;
-
     await this.commentRepository.save(comment);
 
     return plainToClass(Comment, comment);
   }
 
-  async deleteComment(user: User, id: number) {
+  async deleteComment(user: User, id: number): Promise<{ message: string }> {
     const comment = await this.commentRepository.findOne({
       where: { id },
     });
